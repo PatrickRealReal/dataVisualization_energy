@@ -2,13 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 import { DualAxes, Line } from "@ant-design/plots";
 import { Button, DatePicker, FloatButton, message, Select, Space } from "antd";
 import DemoColumn from "./DemoColumn";
-import DemoTabel from "./DemoTabel";
+import DemoTable from "./DemoTable";
 import {
   BarChartOutlined,
   FundOutlined,
   LineChartOutlined,
   UnorderedListOutlined,
 } from "@ant-design/icons";
+
 
 export const DemoLine = () => {
   const [data, setData] = useState([]);
@@ -28,7 +29,7 @@ export const DemoLine = () => {
   ]);
   const [data2, setData2] = useState([]);
   const [area, setArea] = useState("Hokkaido");
-  const [labelName, setLabelName] = useCallbackState(["price"]);
+  const [labelName, setLabelName] = useCallbackState([]);
   const [nda_values, setnda_values] = useCallbackState(["0"]);
   const [dateRange, setDateRange] = useState([]);
   const [areaConfig, setAreaConfig] = useState([
@@ -57,7 +58,7 @@ export const DemoLine = () => {
     geometryOptions: [
       {
         geometry: "line",
-        seriesField: "category", // ×Ô¼º²é
+        seriesField: "category",
         lineStyle: {
           lineWidth: 3,
           lineDash: [5, 5],
@@ -182,321 +183,6 @@ export const DemoLine = () => {
   }
 
   const getList = () => {
-    let test = [
-      { Area: "Hokkaido", AvgDemand: 3245.0, DateTime: 1678924800 },
-      {
-        Area: "Hokkaido",
-        AvgDemand: 3367.0,
-        DateTime: 1678928400,
-      },
-      { Area: "Hokkaido", AvgDemand: 3471.0, DateTime: 1678932000 },
-      {
-        Area: "Hokkaido",
-        AvgDemand: 3568.0,
-        DateTime: 1678935600,
-      },
-      { Area: "Hokkaido", AvgDemand: 3645.0, DateTime: 1678939200 },
-      {
-        Area: "Hokkaido",
-        AvgDemand: 3651.0,
-        DateTime: 1678942800,
-      },
-      { Area: "Hokkaido", AvgDemand: 3683.0, DateTime: 1678946400 },
-      {
-        Area: "Hokkaido",
-        AvgDemand: 3684.0,
-        DateTime: 1678950000,
-      },
-      { Area: "Hokkaido", AvgDemand: 3815.0, DateTime: 1678953600 },
-      {
-        Area: "Hokkaido",
-        AvgDemand: 3999.0,
-        DateTime: 1678957200,
-      },
-      { Area: "Hokkaido", AvgDemand: 3992.0, DateTime: 1678960800 },
-      {
-        Area: "Hokkaido",
-        AvgDemand: 4010.0,
-        DateTime: 1678964400,
-      },
-      { Area: "Hokkaido", AvgDemand: 3876.0, DateTime: 1678968000 },
-      {
-        Area: "Hokkaido",
-        AvgDemand: 4074.0,
-        DateTime: 1678971600,
-      },
-      { Area: "Hokkaido", AvgDemand: 4042.0, DateTime: 1678975200 },
-      {
-        Area: "Hokkaido",
-        AvgDemand: 3967.0,
-        DateTime: 1678978800,
-      },
-      { Area: "Hokkaido", AvgDemand: 3862.0, DateTime: 1678982400 },
-      {
-        Area: "Hokkaido",
-        AvgDemand: 3887.0,
-        DateTime: 1678986000,
-      },
-      { Area: "Hokkaido", AvgDemand: 4004.0, DateTime: 1678989600 },
-      {
-        Area: "Hokkaido",
-        AvgDemand: 3870.0,
-        DateTime: 1678993200,
-      },
-      { Area: "Hokkaido", AvgDemand: 3718.0, DateTime: 1678996800 },
-      {
-        Area: "Hokkaido",
-        AvgDemand: 3583.0,
-        DateTime: 1679000400,
-      },
-      { Area: "Hokkaido", AvgDemand: 3454.0, DateTime: 1679004000 },
-      {
-        Area: "Hokkaido",
-        AvgDemand: 3473.0,
-        DateTime: 1679007600,
-      },
-      { Area: "Hokkaido", AvgDemand: 3411.0, DateTime: 1679011200 },
-      {
-        Area: "Hokkaido",
-        AvgDemand: 3476.0,
-        DateTime: 1679014800,
-      },
-      { Area: "Hokkaido", AvgDemand: 3620.0, DateTime: 1679018400 },
-      {
-        Area: "Hokkaido",
-        AvgDemand: 3741.0,
-        DateTime: 1679022000,
-      },
-      { Area: "Hokkaido", AvgDemand: 3858.0, DateTime: 1679025600 },
-      {
-        Area: "Hokkaido",
-        AvgDemand: 3814.0,
-        DateTime: 1679029200,
-      },
-      { Area: "Hokkaido", AvgDemand: 3779.0, DateTime: 1679032800 },
-      {
-        Area: "Hokkaido",
-        AvgDemand: 3632.0,
-        DateTime: 1679036400,
-      },
-      { Area: "Hokkaido", AvgDemand: 3652.0, DateTime: 1679040000 },
-      {
-        Area: "Hokkaido",
-        AvgDemand: 3907.0,
-        DateTime: 1679043600,
-      },
-      { Area: "Hokkaido", AvgDemand: 3956.0, DateTime: 1679047200 },
-      {
-        Area: "Hokkaido",
-        AvgDemand: 3911.0,
-        DateTime: 1679050800,
-      },
-      { Area: "Hokkaido", AvgDemand: 3744.0, DateTime: 1679054400 },
-      {
-        Area: "Hokkaido",
-        AvgDemand: 3764.0,
-        DateTime: 1679058000,
-      },
-      { Area: "Hokkaido", AvgDemand: 3725.0, DateTime: 1679061600 },
-      {
-        Area: "Hokkaido",
-        AvgDemand: 3649.0,
-        DateTime: 1679065200,
-      },
-      { Area: "Hokkaido", AvgDemand: 3781.0, DateTime: 1679068800 },
-      {
-        Area: "Hokkaido",
-        AvgDemand: 3875.0,
-        DateTime: 1679072400,
-      },
-      { Area: "Hokkaido", AvgDemand: 3992.0, DateTime: 1679076000 },
-      {
-        Area: "Hokkaido",
-        AvgDemand: 3869.0,
-        DateTime: 1679079600,
-      },
-      { Area: "Hokkaido", AvgDemand: 3698.0, DateTime: 1679083200 },
-      {
-        Area: "Hokkaido",
-        AvgDemand: 3537.0,
-        DateTime: 1679086800,
-      },
-      { Area: "Hokkaido", AvgDemand: 3453.0, DateTime: 1679090400 },
-      {
-        Area: "Hokkaido",
-        AvgDemand: 3479.0,
-        DateTime: 1679094000,
-      },
-      { Area: "Hokkaido", AvgPrice: 10.98, DateTime: 1678924800 },
-      {
-        Area: "Hokkaido",
-        AvgPrice: 10.81,
-        DateTime: 1678928400,
-      },
-      { Area: "Hokkaido", AvgPrice: 11.14, DateTime: 1678932000 },
-      {
-        Area: "Hokkaido",
-        AvgPrice: 11.68,
-        DateTime: 1678935600,
-      },
-      { Area: "Hokkaido", AvgPrice: 11.68, DateTime: 1678939200 },
-      {
-        Area: "Hokkaido",
-        AvgPrice: 11.77,
-        DateTime: 1678942800,
-      },
-      { Area: "Hokkaido", AvgPrice: 12.97, DateTime: 1678946400 },
-      {
-        Area: "Hokkaido",
-        AvgPrice: 11.16,
-        DateTime: 1678950000,
-      },
-      { Area: "Hokkaido", AvgPrice: 12.34, DateTime: 1678953600 },
-      {
-        Area: "Hokkaido",
-        AvgPrice: 4.01,
-        DateTime: 1678957200,
-      },
-      { Area: "Hokkaido", AvgPrice: 1.32, DateTime: 1678960800 },
-      {
-        Area: "Hokkaido",
-        AvgPrice: 1.63,
-        DateTime: 1678964400,
-      },
-      { Area: "Hokkaido", AvgPrice: 1.32, DateTime: 1678968000 },
-      {
-        Area: "Hokkaido",
-        AvgPrice: 8.65,
-        DateTime: 1678971600,
-      },
-      { Area: "Hokkaido", AvgPrice: 11.81, DateTime: 1678975200 },
-      {
-        Area: "Hokkaido",
-        AvgPrice: 12.74,
-        DateTime: 1678978800,
-      },
-      { Area: "Hokkaido", AvgPrice: 12.16, DateTime: 1678982400 },
-      {
-        Area: "Hokkaido",
-        AvgPrice: 13.88,
-        DateTime: 1678986000,
-      },
-      { Area: "Hokkaido", AvgPrice: 16.16, DateTime: 1678989600 },
-      {
-        Area: "Hokkaido",
-        AvgPrice: 14.71,
-        DateTime: 1678993200,
-      },
-      { Area: "Hokkaido", AvgPrice: 13.04, DateTime: 1678996800 },
-      {
-        Area: "Hokkaido",
-        AvgPrice: 12.48,
-        DateTime: 1679000400,
-      },
-      { Area: "Hokkaido", AvgPrice: 11.84, DateTime: 1679004000 },
-      {
-        Area: "Hokkaido",
-        AvgPrice: 10.29,
-        DateTime: 1679007600,
-      },
-      { Area: "Hokkaido", AvgPrice: 12.4, DateTime: 1679011200 },
-      {
-        Area: "Hokkaido",
-        AvgPrice: 12.42,
-        DateTime: 1679014800,
-      },
-      { Area: "Hokkaido", AvgPrice: 12.56, DateTime: 1679018400 },
-      {
-        Area: "Hokkaido",
-        AvgPrice: 12.6,
-        DateTime: 1679022000,
-      },
-      { Area: "Hokkaido", AvgPrice: 12.82, DateTime: 1679025600 },
-      {
-        Area: "Hokkaido",
-        AvgPrice: 13.18,
-        DateTime: 1679029200,
-      },
-      { Area: "Hokkaido", AvgPrice: 11.55, DateTime: 1679032800 },
-      {
-        Area: "Hokkaido",
-        AvgPrice: 12.54,
-        DateTime: 1679036400,
-      },
-      { Area: "Hokkaido", AvgPrice: 7.98, DateTime: 1679040000 },
-      {
-        Area: "Hokkaido",
-        AvgPrice: 5.95,
-        DateTime: 1679043600,
-      },
-      { Area: "Hokkaido", AvgPrice: 1.01, DateTime: 1679047200 },
-      {
-        Area: "Hokkaido",
-        AvgPrice: 0.01,
-        DateTime: 1679050800,
-      },
-      { Area: "Hokkaido", AvgPrice: 0.01, DateTime: 1679054400 },
-      {
-        Area: "Hokkaido",
-        AvgPrice: 0.82,
-        DateTime: 1679058000,
-      },
-      { Area: "Hokkaido", AvgPrice: 3.14, DateTime: 1679061600 },
-      {
-        Area: "Hokkaido",
-        AvgPrice: 7.88,
-        DateTime: 1679065200,
-      },
-      { Area: "Hokkaido", AvgPrice: 13.42, DateTime: 1679068800 },
-      {
-        Area: "Hokkaido",
-        AvgPrice: 14.86,
-        DateTime: 1679072400,
-      },
-      { Area: "Hokkaido", AvgPrice: 16.26, DateTime: 1679076000 },
-      {
-        Area: "Hokkaido",
-        AvgPrice: 15.71,
-        DateTime: 1679079600,
-      },
-      { Area: "Hokkaido", AvgPrice: 14.87, DateTime: 1679083200 },
-      {
-        Area: "Hokkaido",
-        AvgPrice: 14.0,
-        DateTime: 1679086800,
-      },
-      { Area: "Hokkaido", AvgPrice: 13.84, DateTime: 1679090400 },
-      {
-        Area: "Hokkaido",
-        AvgPrice: 12.13,
-        DateTime: 1679094000,
-      },
-      { Area: "temp", AvgPrice: 13.84, DateTime: 1679090400 },
-      {
-        Area: "temp",
-        AvgPrice: 12.13,
-        DateTime: 1679094000,
-      },
-      { Area: "temp", AvgDemand: 13.84, DateTime: 1679090400 },
-      {
-        Area: "temp",
-        AvgPrice: 12.13,
-        DateTime: 1679094000,
-      },
-      { Area: "Hokkaido", Load: 13.84, DateTime: 1679090400 },
-      {
-        Area: "Hokkaido",
-        Load: 12.13,
-        DateTime: 1679094000,
-      },
-      { Area: "temp", Load: 13.84, DateTime: 1679090400 },
-      {
-        Area: "temp",
-        Load: 12.13,
-        DateTime: 1679094000,
-      },
-    ];
-
     asyncFetch();
     // asyncTest(test);
   };
@@ -722,7 +408,7 @@ export const DemoLine = () => {
           }
           if (it.label === "table" && it.isShow) {
             return (
-              <DemoTabel
+              <DemoTable
                 style={{ width: "100%",marginBottom: 20  }}
                 key={i}
                 data={data}

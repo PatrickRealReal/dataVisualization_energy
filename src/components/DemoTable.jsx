@@ -15,7 +15,7 @@ function format (time){
     return`${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 
 }
-const DemoTabel = ({data,data2}) => {
+const DemoTable = ({data,data2}) => {
     const [columns, setcolumns] = useState([
         {
             title: 'year',
@@ -48,30 +48,13 @@ const DemoTabel = ({data,data2}) => {
         })
     })
     console.log(datas)
-    // setcolumns([
-    //     {
-    //         title: 'year',
-    //         dataIndex: 'year',
-    //         key: 'year',
-    //     },
-    //     {
-    //         title: 'value',
-    //         dataIndex: 'value',
-    //         key: 'value',
-    //     },
-    //     {
-    //         title: 'category',
-    //         dataIndex: 'category',
-    //         key: 'category',
-    //     },
-    // ])
 
     return (
         <>
-            <Table pagination={false} dataSource={datas} columns={columns}
+            <Table pagination={true} dataSource={datas} columns={columns}
                    rowKey={record => record.index}/>
         </>
     )
 }
 
-export default DemoTabel
+export default DemoTable

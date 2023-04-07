@@ -15,13 +15,15 @@ import redis
 
 load_dotenv()
 
-REDIS_HOST = 'localhost'
-REDIS_PORT = 6379
+REDIS_HOST = 'localhost' # default redis host
+REDIS_PORT = 6379 # default redis port
 CACHE_TIMEOUT = 60 * 60  # 1 hour in seconds
 redis_client = redis.StrictRedis(host=REDIS_HOST, port=REDIS_PORT, db=0, decode_responses=True)
 
 
 async def authorize(username, machineId):
+    #The authorize function is an asynchronous function that takes two arguments, username and machineId.
+    # Its purpose is to authenticate the user by making an HTTP GET request to the specified auth_url.
     auth_url = "https://us-central1-cognito-power-jp.cloudfunctions.net/dev-jp-dataservice-auth"
     async with aiohttp.ClientSession() as session:
         headers = {"Username": username, "MachineId": machineId}
@@ -34,12 +36,17 @@ async def authorize(username, machineId):
             try:
                 return TokenResponse(**json.loads(response_text))
             except Exception as e:
-                print(response_text)
+                # print(response_text)
                 return TokenResponse(False, "")
 
 
 class Token:
-    @staticmethod
+    #The create_token_source function is a static method of the Token class.
+    # Its purpose is to create an instance of the TokenSource class, which represents a token source
+    # for a given user and machine ID. This function takes two arguments, username and machineId.
+    #The purpose of this function is to create a token source based on the authentication result for a given user
+    # and machine ID.The token source can then be used in the application to access resources that require authentication.
+    @staticmethod ## Call the static method without creating an instance of the class
     async def create_token_source(username, machineId):
         token_response = await authorize(username, machineId)
         if token_response.success:
@@ -47,13 +54,13 @@ class Token:
         else:
             return TokenSource(username, machineId, None, message="Not authorized")
 
-
+# Storing the authentication result in a class
 class TokenResponse:
     def __init__(self, success, token):
         self.success = success
         self.token = token
 
-
+# Storing the token source in a class
 class TokenSource:
     def __init__(self, username, machineId, token, message=None):
         self.username = username
@@ -62,16 +69,16 @@ class TokenSource:
         self.message = message
 
 
-app = Flask(__name__)
-CORS(app, resources=r'/*')
+app = Flask(__name__) # Create a Flask application
+CORS(app, resources=r'/*') # Allow CORS for all routes(Regular expression means for all routes)
 
 
-@app.route('/api/data', methods=['GET'])
-async def get_data():
+@app.route('/api/data', methods=['GET']) # Create a route for the API
+async def get_data(): # Create an asynchronous function to reduce the response time
     username = os.environ.get("USERNAME")
     machineId = os.environ.get("MACHINEID")
     token_source = await Token.create_token_source(username, machineId)
-    start_date = request.args.get('StartDate', '2022-01-01')
+    start_date = request.args.get('StartDate', '2022-01-01') # Default value to be used if not fetched
     end_date = request.args.get('EndDate', '2022-02-01')
     status = request.args.get('status')
     status = status.split(',')
@@ -81,7 +88,7 @@ async def get_data():
     nda_values = nda_values.split(',')
 
     cache_key = f"{start_date}-{end_date}-{status}-{myarea}-{nda_values}"
-    cached_data = redis_client.get(cache_key)
+    cached_data = redis_client.get(cache_key) # Get the cached data from Redis
     if cached_data:
         return jsonify(json.loads(cached_data))
 
@@ -157,10 +164,10 @@ async def get_data():
                             }
 
                             response3 = requests.get(url3, headers=headers, params=params3)
-                            print(params3, 'params3')
+                            # print(params3, 'params3')
                             if response3.status_code == 200:
                                 data3 = json.loads(response3.json()["result"])
-                                print(data3, 'data3')
+                                # print(data3, 'data3')
 
                                 if len(data3) != 0:
                                     df3 = pd.DataFrame.from_records(data3)
@@ -169,7 +176,7 @@ async def get_data():
                                     res.extend(json_data3)
 
         redis_client.setex(cache_key, CACHE_TIMEOUT, json.dumps(res))
-        # print(res)
+        print(res)
         return res
 
     return make_response(jsonify({"error": "No token available"}), 401)
