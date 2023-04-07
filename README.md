@@ -1,9 +1,5 @@
 # DevDataServiceWebUI
 
-# Getting Started with the link
-
-This project can be viewed on https://ecdashboard.herokuapp.com/
-
 ## Available Scripts
 
 In the project directory, you can run:
