@@ -13,11 +13,11 @@ Firstly run this line to start redis service.
 
 ### `LASK_APP=get_data_async_cache.py flask run`
 
-Firstly run this line of code to make the Flask APP running.
+Secondly run this line of code to make the Flask APP running.
 
 ### `npm start`
 
-Runs the app in the development mode, The page will reload when you make changes.
+Then run the app in the development mode, The page will reload when you make changes.
 
 
 
