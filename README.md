@@ -1,6 +1,6 @@
 # DevDataServiceWebUI
 
-# Getting Started with Create React App
+# Getting Started with the link
 
 This project can be viewed on https://ecdashboard.herokuapp.com/
 
