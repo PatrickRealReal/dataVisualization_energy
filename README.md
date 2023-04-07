@@ -13,7 +13,7 @@ Secondly run this line of code to make the Flask APP running.
 
 ### `npm start`
 
-Then run the app in the development mode, The page will reload when you make changes.
+Then run the app in the development mode, and the page will reload when you make changes.
 
 
 
